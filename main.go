@@ -107,10 +107,11 @@ func setmap(tmap map[string]string, prefix string) {
 
 func md5f(fName string) string {
 	f, e := os.Open(fName)
-	defer fmt.Println(f.Close().Error())
 	if e != nil {
 		fmt.Println(e.Error())
+                return ""
 	}
+        defer f.Close()
 	h := md5.New()
 	_, e = io.Copy(h, f)
 	if e != nil {
